@@ -5,11 +5,15 @@
       :style="{
         top: `${toppo}px`,
         left: `${left}px`
-      }">
+      }"
+    >
       <div
-       class="btn1"
-       @click="$emit('minus')"
-       @mousemove="onMousemove">✖︎</div>
+        class="btn1"
+        @click="$emit('minus')"
+        @mousemove="onMousemove"
+      >
+        ✖︎
+      </div>
       <textarea />
     </div>
   </div>
@@ -39,7 +43,6 @@ export default {
 .memo1{
   display: inline-block;
   position: fixed;
-  /* overflow: hidden; */
   height: 350px;
   width: 250px;
   background-color: rgb(236, 155, 155);

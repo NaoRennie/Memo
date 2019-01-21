@@ -2,9 +2,10 @@
   <section class="container">
     <div>
       <Plus
-        :toppo="400"
-        :left="750"
-        @plus="plusMemo" />
+        :toppo="600"
+        :left="1200"
+        @plus="plusMemo"
+      />
       <!-- <logo /> -->
       <!-- <memo :top="50" :left="0" />
       <memo :top="50" :left="250" />
@@ -14,7 +15,8 @@
         :key="index"
         :toppo="position.toppo"
         :left="position.left"
-        @minus="minusMemo(index)"/>
+        @minus="minusMemo(index)"
+      />
       <h1 class="title">
         mymemo
       </h1>
@@ -26,12 +28,16 @@
           href="https://nuxtjs.org/"
           target="_blank"
           class="button--green"
-        >Documentation</a>
+        >
+          Documentation
+        </a>
         <a
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey"
-        >GitHub</a>
+        >
+          GitHub
+        </a>
       </div>
     </div>
   </section>
@@ -91,7 +97,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: url('../assets/wall.jpg')
+  background: url('../assets/blackboard.png')
 }
 
 .title {

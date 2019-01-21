@@ -1,12 +1,15 @@
 <template>
   <div>
     <div
-     class="btn"
-     :style="{
-     top: `${toppo}px`,
-     left: `${left}px`
+      class="btn"
+      :style="{
+        top: `${toppo}px`,
+        left: `${left}px`
       }"
-      @click="$emit('plus')">➕</div>
+      @click="$emit('plus')"
+    >
+      ➕
+    </div>
   </div>
 </template>
 <script>

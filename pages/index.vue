@@ -1,48 +1,21 @@
 <template>
   <section class="container">
-    <div>
-      <Plus
-        :toppo="600"
-        :left="1200"
-        @plus="plusMemo"
-      />
-      <!-- <logo /> -->
-      <!-- <memo :top="50" :left="0" />
-      <memo :top="50" :left="250" />
-      <memo :top="50" :left="300" /> -->
-      <memo
-        v-for="(position, index) in memoPositions"
-        :key="index"
-        :toppo="position.toppo"
-        :left="position.left"
-        @minus="minusMemo(index)"
-        @mousedown="onMousedown"
-        @mouseup="onMouseup"
-        @mousemove="onMousemove"
-      />
-      <h1 class="title">
-        mymemo
-      </h1>
-      <h2 class="subtitle">
-        mymemo
-      </h2>
-      <div class="links">
-        <!-- <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a> -->
-        <!-- <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a> -->
-      </div>
-    </div>
+    <Plus
+      :toppo="600"
+      :left="1200"
+      @plus="plusMemo"
+    />
+    <memo
+      v-for="(position, index) in memoPositions"
+      :key="index"
+      :toppo="position.toppo"
+      :left="position.left"
+      @minus="minusMemo(index)"
+      @onMousedown="onMousedown(e)"
+      @onMouseup="onMouseup(e)"
+      @onMousemove="onMousemove(e)"
+
+    />
   </section>
 </template>
 <script>
@@ -57,19 +30,11 @@ export default {
   data() {
     return {
       memoPositions: [
-
         // {
         //   toppo: 0,
         //   left: 50
         // },
-        // {
-        //   toppo: 0,
-        //   left: 350
-        // },
-        // {
-        //   toppo: 0,
-        //   left: 700
-        // }
+
       ]
     }
   },
@@ -86,19 +51,23 @@ export default {
       this.memoPositions = [...this.memoPositions]
       this.memoPositions.splice(index, 1)
     },
-    onMousedown() {
-      this.dragging = true
-      this.x = this.y = 0
+    onMousedown(e) {
+      console.log('HHHHH')
+      // this.dragging = true
+      // this.x = this.y = 0
     },
-    onMouseup() {
-      this.dragging = false
-      this.x = this.y = 'no'
+    onMouseup(e) {
+      console.log('TTTTTT')
+      // this.dragging = false
+      // this.x = this.y = 'no'
     },
-    onMousemove(event) {
-      if (this.dragging) {
-        this.x = event.clientX
-        this.y = event.clientY
-      }
+    onMousemove(e) {
+      console.log('DDDDDDDDDDD')
+      // if (this.dragging) {
+      //   this.x = event.clientX
+      //   this.y = event.clientY
+      // }
+      // console.log(event)
     }
   }
 }

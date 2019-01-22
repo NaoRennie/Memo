@@ -6,9 +6,9 @@
         top: `${toppo}px`,
         left: `${left}px`
       }"
-      @mousedown="onMousedown"
-      @mouseup="onMouseup"
-      @mousemove="onMousemove"
+      @mousedown="$emit('onMousedown')"
+      @mouseup="$emit('onMouseup')"
+      @mousemove="$emit('onMousemove')"
     >
       <div
         class="btn1"
@@ -31,13 +31,18 @@ export default {
       type: Number,
       default: 0
     },
-    data() {
-      return {
-        isDragging: false,
-        prevX: 0,
-        prevY: 0
+    methods: {
+      onMousemove(e) {
+        console.log(e)
       }
     }
+    // data() {
+    //   return {
+    //     isDragging: false,
+    //     prevX: 0,
+    //     prevY: 0
+    //   }
+    // }
   }
 }
 </script>

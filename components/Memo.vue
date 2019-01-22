@@ -6,11 +6,13 @@
         top: `${toppo}px`,
         left: `${left}px`
       }"
+      @mousedown="onMousedown"
+      @mouseup="onMouseup"
+      @mousemove="onMousemove"
     >
       <div
         class="btn1"
         @click="$emit('minus')"
-        @mousemove="onMousemove"
       >
         ✖︎
       </div>
@@ -29,9 +31,11 @@ export default {
       type: Number,
       default: 0
     },
-    methods: {
-      onMousemove(e) {
-        console.log(e)
+    data() {
+      return {
+        isDragging: false,
+        prevX: 0,
+        prevY: 0
       }
     }
   }
@@ -54,7 +58,6 @@ textarea{
   margin-top: 50px;
   background-color: rgb(196, 7, 7);
   font-size: 20px;
-
 }
 .btn1{
   background-color: rgb(240, 13, 164);

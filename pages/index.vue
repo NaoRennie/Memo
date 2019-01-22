@@ -16,6 +16,9 @@
         :toppo="position.toppo"
         :left="position.left"
         @minus="minusMemo(index)"
+        @mousedown="onMousedown"
+        @mouseup="onMouseup"
+        @mousemove="onMousemove"
       />
       <h1 class="title">
         mymemo
@@ -24,20 +27,20 @@
         mymemo
       </h2>
       <div class="links">
-        <a
+        <!-- <a
           href="https://nuxtjs.org/"
           target="_blank"
           class="button--green"
         >
           Documentation
-        </a>
-        <a
+        </a> -->
+        <!-- <a
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey"
         >
           GitHub
-        </a>
+        </a> -->
       </div>
     </div>
   </section>
@@ -80,9 +83,22 @@ export default {
       ]
     },
     minusMemo(index) {
-      console.log(index)
       this.memoPositions = [...this.memoPositions]
       this.memoPositions.splice(index, 1)
+    },
+    onMousedown() {
+      this.dragging = true
+      this.x = this.y = 0
+    },
+    onMouseup() {
+      this.dragging = false
+      this.x = this.y = 'no'
+    },
+    onMousemove(event) {
+      if (this.dragging) {
+        this.x = event.clientX
+        this.y = event.clientY
+      }
     }
   }
 }

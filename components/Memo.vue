@@ -31,10 +31,8 @@ export default {
       type: Number,
       default: 0
     },
-    methods: {
-      onMousemove(e) {
-        console.log(e)
-      }
+    onMousemove(e) {
+      console.log(e, 'e')
     }
     // data() {
     //   return {

@@ -13,7 +13,7 @@
       @minus="minusMemo(index)"
       @onMousedown="onMousedown(e)"
       @onMouseup="onMouseup(e)"
-      @onMousemove="onMousemove(e)"
+      @onMousemove="onMousemove()"
 
     />
   </section>
@@ -62,12 +62,13 @@ export default {
       // this.x = this.y = 'no'
     },
     onMousemove(e) {
-      console.log('DDDDDDDDDDD')
+      console.log('hhh')
+      console.log(e)
       // if (this.dragging) {
-      //   this.x = event.clientX
-      //   this.y = event.clientY
+      //   this.x = e.clientX
+      //   this.y = e.clientY
       // }
-      // console.log(event)
+      console.log(event.x)
     }
   }
 }

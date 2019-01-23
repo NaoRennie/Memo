@@ -11,8 +11,8 @@
       :toppo="position.toppo"
       :left="position.left"
       @minus="minusMemo(index)"
-      @onMousedown="onMousedown(e)"
-      @onMouseup="onMouseup(e)"
+      @onMousedown="onMousedown()"
+      @onMouseup="onMouseup()"
       @onMousemove="onMousemove()"
 
     />
@@ -53,23 +53,29 @@ export default {
     },
     onMousedown(e) {
       console.log('HHHHH')
-      // this.dragging = true
-      // this.x = this.y = 0
+      this.dragging = true
+      this.x = this.y = 0
+      console.log(event.y)
+      console.log(event.x)
     },
     onMouseup(e) {
       console.log('TTTTTT')
-      // this.dragging = false
-      // this.x = this.y = 'no'
-    },
-    onMousemove(e) {
-      console.log('hhh')
-      console.log(e)
-      // if (this.dragging) {
-      //   this.x = e.clientX
-      //   this.y = e.clientY
-      // }
+      this.dragging = false
+      this.x = this.y = 'no'
+      console.log(event.y)
       console.log(event.x)
+    },
+    onMousemove() {
+      console.log('hhh')
+      if (this.dragging) {
+        this.memoPositions = {
+          toppo: event.x - this.x
+        }
+        console.log(this.x, 'this')
+        console.log(event.x)
+      }
     }
+
   }
 }
 

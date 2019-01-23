@@ -31,16 +31,13 @@ export default {
       type: Number,
       default: 0
     },
-    onMousemove(e) {
-      console.log(e, 'e')
+    data() {
+      return {
+        isDragging: false,
+        prevX: 0,
+        prevY: 0
+      }
     }
-    // data() {
-    //   return {
-    //     isDragging: false,
-    //     prevX: 0,
-    //     prevY: 0
-    //   }
-    // }
   }
 }
 </script>

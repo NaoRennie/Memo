@@ -12,9 +12,8 @@
       :left="position.left"
       @minus="minusMemo(index)"
       @onMousedown="onMousedown()"
-      @onMouseup="onMouseup()"
-      @onMousemove="onMousemove()"
-
+      @onMouseup="onMouseup(index)"
+      @onMousemove="onMousemove(index)"
     />
   </section>
 </template>
@@ -51,31 +50,32 @@ export default {
       this.memoPositions = [...this.memoPositions]
       this.memoPositions.splice(index, 1)
     },
-    onMousedown(e) {
+    onMousedown() {
       console.log('HHHHH')
-      this.dragging = true
-      this.x = this.y = 0
-      console.log(event.y)
-      console.log(event.x)
+      this.isDragging = true
     },
-    onMouseup(e) {
+    onMouseup(index) {
       console.log('TTTTTT')
-      this.dragging = false
-      this.x = this.y = 'no'
-      console.log(event.y)
-      console.log(event.x)
+      this.isDragging = false
+      this.memoPositions = [...this.memoPositions]
+      this.memoPositions[index].toppo = event.x
+      this.memoPositions[index].left = event.y
+      console.log(this.isDragging)
+      // this.memoPositions.splice(index, 1, { toppo: event.x, left: event.y })
     },
-    onMousemove() {
+    onMousemove(index) {
       console.log('hhh')
-      if (this.dragging) {
-        this.memoPositions = {
-          toppo: event.x - this.x
-        }
-        console.log(this.x, 'this')
-        console.log(event.x)
+      // console.log(data.prevX, 'pres')
+      console.log(index, 'in')
+      console.log(event.x)
+      console.log(this.isDragging)
+      if (this.isDragging) {
+        this.memoPositions = [...this.memoPositions]
+        this.memoPositions[index].toppo = event.x
+        this.memoPositions[index].left = event.y
+        // this.memoPositions.splice(index, 1, { toppo: event.x, left: event.y })
       }
     }
-
   }
 }
 

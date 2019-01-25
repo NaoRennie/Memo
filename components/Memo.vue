@@ -14,9 +14,13 @@
       class="btn1"
       @click="$emit('minus')"
     >
-      ✖︎
+      ×
     </div>
-    <textarea />
+    <textarea id="textarea" />
+    <div class="colors_btn">
+      <div class="pink" @click="$emit('clickPink')"/>
+      <div class="green" @click="$emit('clickGreen')"/>
+    </div>
   </div>
 </template>
 <script>
@@ -46,27 +50,26 @@ export default {
 .memo{
   display: inline-block;
   position: fixed;
-  height: 350px;
+  height: 400px;
   width: 250px;
-  background-color: rgb(236, 155, 155);
 }
 .tab{
   display: inline-block;
   position: fixed;
   height: 50px;
   width: 250px;
-  background-color: rgb(133, 201, 94);
+  background-color: rgb(167, 94, 201);
 }
-textarea{
+#textarea{
   width: 250px;
   height: 300px;
   /* position: absolute; */
   margin-top: 50px;
-  background-color: rgb(196, 7, 7);
+  background-color: rgb(223, 14, 111);
   font-size: 20px;
 }
 .btn1{
-  background-color: rgb(240, 13, 164);
+  background-color: rgb(219, 111, 233);
   display: inline-block;
   position: absolute;
   top: 3px;
@@ -75,6 +78,19 @@ textarea{
   width: 50px;
   border-radius: 50%;
   font-size: 40px;
+}
+.colors_btn{
+  display: flex;
+}
+.pink {
+  width: 125px;
+  height: 50px;
+  background-color: pink;
+}
+.green {
+  width: 125px;
+  height: 50px;
+  background-color: rgb(110, 238, 110);
 }
 
 /* memo.{

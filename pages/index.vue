@@ -15,7 +15,9 @@
       :toppo="position.toppo"
       :left="position.left"
       @minus="minusMemo(index)"
-      @onMousedown="onMousedown(index)"
+      @onMousedown="onMousedown(index, e)"
+      @clickPink="clickPink(index)"
+      @clickGreen="clickGreen(index)"
     />
   </section>
 </template>
@@ -54,13 +56,16 @@ export default {
       this.memoPositions = [...this.memoPositions]
       this.memoPositions.splice(index, 1)
     },
-    onMousedown(index) {
+    onMousedown(index, e) {
       console.log('HHHHH')
       console.log(index, 'index')
+      console.log(e, 'e')
       this.isDragging = true
       this.index1 = index
+      this.prevY = event.pageY
+      this.prevX = event.pageX
+
       console.log(this.index1, 'ininini')
-      console.log(this.isDragging)
     },
     onMouseup(e) {
       console.log('TTTTTT')
@@ -80,9 +85,18 @@ export default {
       console.log(this.isDragging)
       if (this.isDragging === true) {
         this.memoPositions = [...this.memoPositions]
-        this.memoPositions[this.index1].toppo = e.pageY
-        this.memoPositions[this.index1].left = e.pageX
+        this.memoPositions[this.index1].toppo = e.pageY - this.prevY
+        this.memoPositions[this.index1].left = e.pageX - this.prevX
       }
+    },
+    clickPink(index) {
+      console.log('PINK')
+      console.log(index)
+      // setRedColor('background-color', 'red')
+    },
+    clickGreen(index) {
+      console.log('GREEN')
+      document.getElementById('textarea').style.backgroundColor = 'green'
     }
   }
 }

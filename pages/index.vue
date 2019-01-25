@@ -1,8 +1,12 @@
 <template>
-  <section class="container">
+  <section
+    class="container"
+    @mouseup="onMouseup"
+    @mousemove="onMousemove"
+  >
     <Plus
       :toppo="600"
-      :left="1200"
+      :left="0"
       @plus="plusMemo"
     />
     <memo
@@ -11,9 +15,7 @@
       :toppo="position.toppo"
       :left="position.left"
       @minus="minusMemo(index)"
-      @onMousedown="onMousedown()"
-      @onMouseup="onMouseup(index)"
-      @onMousemove="onMousemove(index)"
+      @onMousedown="onMousedown(index)"
     />
   </section>
 </template>
@@ -33,10 +35,12 @@ export default {
         //   toppo: 0,
         //   left: 50
         // },
-
       ]
     }
   },
+  // data2() {
+  //   this.index1 = null
+  // },
   methods: {
     plusMemo() {
       const widthCount = Math.floor(window.innerWidth / 250)
@@ -50,30 +54,34 @@ export default {
       this.memoPositions = [...this.memoPositions]
       this.memoPositions.splice(index, 1)
     },
-    onMousedown() {
+    onMousedown(index) {
       console.log('HHHHH')
+      console.log(index, 'index')
       this.isDragging = true
+      this.index1 = index
+      console.log(this.index1, 'ininini')
+      console.log(this.isDragging)
     },
-    onMouseup(index) {
+    onMouseup(e) {
       console.log('TTTTTT')
       this.isDragging = false
-      this.memoPositions = [...this.memoPositions]
-      this.memoPositions[index].toppo = event.x
-      this.memoPositions[index].left = event.y
+      // this.memoPositions = [...this.memoPositions]
+      // this.memoPositions[this.index1].toppo = e.pageX
+      // this.memoPositions[this.index1].left = e.pageY
+      // this.index1 = null
       console.log(this.isDragging)
       // this.memoPositions.splice(index, 1, { toppo: event.x, left: event.y })
     },
-    onMousemove(index) {
+    onMousemove(e) {
       console.log('hhh')
-      // console.log(data.prevX, 'pres')
-      console.log(index, 'in')
-      console.log(event.x)
+      console.log(this.index1, 'in')
+      console.log(e, 'event')
+      console.log(e.pageX)
       console.log(this.isDragging)
-      if (this.isDragging) {
+      if (this.isDragging === true) {
         this.memoPositions = [...this.memoPositions]
-        this.memoPositions[index].toppo = event.x
-        this.memoPositions[index].left = event.y
-        // this.memoPositions.splice(index, 1, { toppo: event.x, left: event.y })
+        this.memoPositions[this.index1].toppo = e.pageY
+        this.memoPositions[this.index1].left = e.pageX
       }
     }
   }

@@ -1,23 +1,22 @@
 <template>
-  <div class="memo">
+  <div
+    class="memo"
+    :style="{
+      top: `${toppo}px`,
+      left: `${left}px`
+    }"
+  >
     <div
-      class="memo1"
-      :style="{
-        top: `${toppo}px`,
-        left: `${left}px`
-      }"
+      class="tab"
       @mousedown="$emit('onMousedown')"
-      @mouseup="$emit('onMouseup')"
-      @mousemove="$emit('onMousemove')"
+    />
+    <div
+      class="btn1"
+      @click="$emit('minus')"
     >
-      <div
-        class="btn1"
-        @click="$emit('minus')"
-      >
-        ✖︎
-      </div>
-      <textarea />
+      ✖︎
     </div>
+    <textarea />
   </div>
 </template>
 <script>
@@ -44,12 +43,19 @@ export default {
 
 <style>
 
-.memo1{
+.memo{
   display: inline-block;
   position: fixed;
   height: 350px;
   width: 250px;
   background-color: rgb(236, 155, 155);
+}
+.tab{
+  display: inline-block;
+  position: fixed;
+  height: 50px;
+  width: 250px;
+  background-color: rgb(133, 201, 94);
 }
 textarea{
   width: 250px;

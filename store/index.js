@@ -27,12 +27,12 @@ export const mutations = {
       memo
     ]
   },
-  // minusMemo(state, memo) {
-  //   state.memoList = [
-  //     ...state.memoList,
-  //     memo
-  //   ]
-  // },
+  minusMemo(state, memo) {
+    state.memoList = [
+      ...state.memoList,
+      memo
+    ]
+  },
   updateText(state, { index, text }) {
     state.memoList = [...state.memoList]
     state.memoList[index] = {

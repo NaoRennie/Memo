@@ -1,106 +1,79 @@
 <template>
   <section
     class="container"
-    @mouseup="onMouseup"
     @mousemove="onMousemove"
+    @mouseup="onMouseup"
   >
-    <Plus
-      :toppo="600"
-      :left="0"
-      @plus="plusMemo"
-    />
     <memo
-      v-for="(position, index) in memoPositions"
+      v-for="(mm, index) in $store.state.memoList"
       :key="index"
-      :toppo="position.toppo"
-      :left="position.left"
-      @minus="minusMemo(index)"
-      @onMousedown="onMousedown(index, e)"
-      @clickPink="clickPink(index)"
-      @clickGreen="clickGreen(index)"
+      :toppo="mm.toppo"
+      :left="mm.left"
+      :index="index"
+      @dragStart="onDragStart($event, index)"
+      @minus="minusMemo"
     />
+    <plus-btn @plus="plusMemo" />
   </section>
 </template>
+
 <script>
-import Plus from '~/components/Plus.vue'
 import Memo from '~/components/Memo.vue'
+import PlusBtn from '~/components/PlusBtn.vue'
 
 export default {
   components: {
-    Plus,
-    Memo
+    Memo,
+    PlusBtn
   },
   data() {
     return {
-      memoPositions: [
-        // {
-        //   toppo: 0,
-        //   left: 50
-        // },
-      ]
+      draggingIndex: null,
+      prevX: null,
+      prevY: null
     }
   },
-  // data2() {
-  //   this.index1 = null
-  // },
   methods: {
     plusMemo() {
       const widthCount = Math.floor(window.innerWidth / 250)
-      this.memoPositions = [
-        ...this.memoPositions,
-        { toppo: Math.floor(this.memoPositions.length / widthCount) * 350,
-          left: 250 * (this.memoPositions.length % widthCount) }
-      ]
+
+      this.$store.commit('addMemo', {
+        toppo: Math.floor(this.$store.state.memoList.length / widthCount) * 350,
+        left: (this.$store.state.memoList.length % widthCount) * 250,
+        text: ''
+      })
     },
     minusMemo(index) {
-      this.memoPositions = [...this.memoPositions]
-      this.memoPositions.splice(index, 1)
-    },
-    onMousedown(index, e) {
-      console.log('HHHHH')
-      console.log(index, 'index')
-      console.log(e, 'e')
-      this.isDragging = true
-      this.index1 = index
-      this.prevY = event.pageY
-      this.prevX = event.pageX
-
-      console.log(this.index1, 'ininini')
-    },
-    onMouseup(e) {
-      console.log('TTTTTT')
-      this.isDragging = false
+      this.$store.commit('minusMemo',
+        this.$store.state.memoList.splice(index, 1))
       // this.memoPositions = [...this.memoPositions]
-      // this.memoPositions[this.index1].toppo = e.pageX
-      // this.memoPositions[this.index1].left = e.pageY
-      // this.index1 = null
-      console.log(this.isDragging)
-      // this.memoPositions.splice(index, 1, { toppo: event.x, left: event.y })
+      // this.memoPositions.splice(index, 1)
+    },
+    onDragStart({ x, y }, index) {
+      this.draggingIndex = index
+      this.prevX = x
+      this.prevY = y
     },
     onMousemove(e) {
-      console.log('hhh')
-      console.log(this.index1, 'in')
-      console.log(e, 'event')
-      console.log(e.pageX)
-      console.log(this.isDragging)
-      if (this.isDragging === true) {
-        this.memoPositions = [...this.memoPositions]
-        this.memoPositions[this.index1].toppo = e.pageY - this.prevY
-        this.memoPositions[this.index1].left = e.pageX - this.prevX
-      }
+      if (this.draggingIndex === null) return
+
+      const x = e.pageX
+      const y = e.pageY
+      const target = { ...this.memoPositions[this.draggingIndex] }
+      target.left += x - this.prevX
+      target.toppo += y - this.prevY
+
+      this.memoPositions = [...this.memoPositions]
+      this.memoPositions[this.draggingIndex] = target
+
+      this.prevX = x
+      this.prevY = y
     },
-    clickPink(index) {
-      console.log('PINK')
-      console.log(index)
-      // setRedColor('background-color', 'red')
-    },
-    clickGreen(index) {
-      console.log('GREEN')
-      document.getElementById('textarea').style.backgroundColor = 'green'
+    onMouseup() {
+      this.draggingIndex = null
     }
   }
 }
-
 </script>
 
 <style>
@@ -111,7 +84,8 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: url('../assets/blackboard.png')
+  background: url('../assets/blackboard.png');
+  user-select: none;
 }
 
 .title {

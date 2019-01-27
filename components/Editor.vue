@@ -17,7 +17,7 @@ export default {
     onInput(e) {
       this.$store.commit('updateText', {
         index: this.index,
-        text: this.target.value
+        text: e.target.value
       })
     }
   }

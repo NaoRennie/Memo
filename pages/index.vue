@@ -5,13 +5,13 @@
     @mouseup="onMouseup"
   >
     <memo
-      v-for="(mm, index) in $store.state.memoList"
+      v-for="(eachMemo, index) in $store.state.memoList"
       :key="index"
-      :toppo="mm.toppo"
-      :left="mm.left"
+      :toppo="eachMemo.toppo"
+      :left="eachMemo.left"
       :index="index"
       @dragStart="onDragStart($event, index)"
-      @minus="minusMemo"
+      @minusMemo="minusMemo(index)"
     />
     <plus-btn @plus="plusMemo" />
   </section>
@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     plusMemo() {
+      console.log('add')
       const widthCount = Math.floor(window.innerWidth / 250)
-
       this.$store.commit('addMemo', {
         toppo: Math.floor(this.$store.state.memoList.length / widthCount) * 350,
         left: (this.$store.state.memoList.length % widthCount) * 250,
@@ -44,10 +44,10 @@ export default {
       })
     },
     minusMemo(index) {
-      this.$store.commit('minusMemo',
-        this.$store.state.memoList.splice(index, 1))
-      // this.memoPositions = [...this.memoPositions]
-      // this.memoPositions.splice(index, 1)
+      console.log(index, 'inde')
+      console.log(this.$store.state.memoList[index], 'hihi')
+      // this.$store.state.memoList = [...this.$store.state.memoList]
+      this.$store.commit('reduceMemo', index)
     },
     onDragStart({ x, y }, index) {
       this.draggingIndex = index
@@ -56,15 +56,14 @@ export default {
     },
     onMousemove(e) {
       if (this.draggingIndex === null) return
-
       const x = e.pageX
       const y = e.pageY
-      const target = { ...this.memoPositions[this.draggingIndex] }
+      const target = { ...this.$store.state.memoList[this.draggingIndex] }
       target.left += x - this.prevX
       target.toppo += y - this.prevY
 
-      this.memoPositions = [...this.memoPositions]
-      this.memoPositions[this.draggingIndex] = target
+      this.$store.state.memoList = [...this.$store.state.memoList]
+      this.$store.state.memoList[this.draggingIndex] = target
 
       this.prevX = x
       this.prevY = y

@@ -1,8 +1,9 @@
 <template>
   <textarea
-  :value="$store.getters.memoData(index).text"
-  @input="onInput"
-  class="editor" />
+    :value="$store.getters.memoData(index).text"
+    @input="onInput"
+    class="editor"
+  />
 </template>
 
 <script>

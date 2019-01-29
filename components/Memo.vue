@@ -4,16 +4,23 @@
     :style="{
       top: `${toppo}px`,
       left: `${left}px`}"
-    >
-  <div
-    class="handle"
-    @mousedown="onMousedown"/>
+  >
+    <div
+      class="handle"
+      @mousedown="onMousedown"
+    />
     <editor :index="index" />
-   </div>
+    <span class="close" @click="$emit('minusMemo', index)" >
+      X
+    </span>
+  </div>
 </template>
 <script>
 import Editor from '~/components/Editor'
 export default {
+  components: {
+    Editor
+  },
   props: {
     toppo: {
       type: Number,
@@ -27,9 +34,6 @@ export default {
       type: Number,
       default: 0
     }
-  },
-  components: {
-    Editor
   },
   methods: {
     onMousedown(e) {
@@ -57,5 +61,11 @@ export default {
   height: 50px;
   background-color: #900;
   cursor: move;
+}
+.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 30px;
 }
 </style>

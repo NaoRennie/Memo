@@ -27,11 +27,15 @@ export const mutations = {
       memo
     ]
   },
-  minusMemo(state, memo) {
-    state.memoList = [
-      ...state.memoList,
-      memo
-    ]
+  reduceMemo(state, index) {
+    // state.memoList = [
+    //   ...state.memoList,
+    //   memo
+    // ]
+    console.log(index)
+    state.memoList = [...this.state.memoList]
+    console.log(state.memeList, 'concon')
+    state.memoList.splice(index, 1)
   },
   updateText(state, { index, text }) {
     state.memoList = [...state.memoList]

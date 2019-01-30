@@ -28,14 +28,35 @@ export const mutations = {
     ]
   },
   reduceMemo(state, index) {
-    // state.memoList = [
-    //   ...state.memoList,
-    //   memo
-    // ]
     console.log(index)
     state.memoList = [...this.state.memoList]
     console.log(state.memeList, 'concon')
     state.memoList.splice(index, 1)
+  },
+  startDrag(state, { x, y, index }) {
+    console.log(x, y, index)
+    console.log(state.memoList[index], 'memomemo')
+    this.draggingIndex = index
+    this.prevX = x
+    this.prevY = y
+    console.log(this.prevY, 'YYY')
+  },
+  moveDrag(state, e) {
+    if (this.draggingIndex === null) return
+    const x = e.pageX
+    const y = e.pageY
+    const target = { ...state.memoList[this.draggingIndex] }
+    target.left += x - this.prevX
+    target.toppo += y - this.prevY
+
+    state.memoList = [...state.memoList]
+    state.memoList[this.draggingIndex] = target
+
+    this.prevX = x
+    this.prevY = y
+  },
+  stopDrag() {
+    this.draggingIndex = null
   },
   updateText(state, { index, text }) {
     state.memoList = [...state.memoList]

@@ -1,7 +1,7 @@
 <template>
   <section
     class="container"
-    @mousemove="onMousemove"
+    @mousemove="onMousemove($event)"
     @mouseup="onMouseup"
   >
     <memo
@@ -44,32 +44,23 @@ export default {
       })
     },
     minusMemo(index) {
-      console.log(index, 'inde')
-      console.log(this.$store.state.memoList[index], 'hihi')
-      // this.$store.state.memoList = [...this.$store.state.memoList]
+      console.log('minus')
       this.$store.commit('reduceMemo', index)
     },
     onDragStart({ x, y }, index) {
-      this.draggingIndex = index
-      this.prevX = x
-      this.prevY = y
+      this.$store.commit('startDrag', { x: x, y: y, index: index })
+      console.log(x, y, index, 'vue')
+
+      // this.draggingIndex = index
+      // this.prevX = x
+      // this.prevY = y
     },
     onMousemove(e) {
-      if (this.draggingIndex === null) return
-      const x = e.pageX
-      const y = e.pageY
-      const target = { ...this.$store.state.memoList[this.draggingIndex] }
-      target.left += x - this.prevX
-      target.toppo += y - this.prevY
-
-      this.$store.state.memoList = [...this.$store.state.memoList]
-      this.$store.state.memoList[this.draggingIndex] = target
-
-      this.prevX = x
-      this.prevY = y
+      this.$store.commit('moveDrag', e)
     },
     onMouseup() {
-      this.draggingIndex = null
+      // this.draggingIndex = null
+      this.$store.commit('stopDrag')
     }
   }
 }

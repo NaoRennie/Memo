@@ -10,8 +10,10 @@
       :toppo="eachMemo.toppo"
       :left="eachMemo.left"
       :index="index"
+      :backgroundColor="eachMemo.backgroundColor"
       @dragStart="onDragStart($event, index)"
       @minusMemo="minusMemo(index)"
+      @changeRed="changeRed(index)"
     />
     <plus-btn @plus="plusMemo" />
   </section>
@@ -46,6 +48,9 @@ export default {
     minusMemo(index) {
       console.log('minus')
       this.$store.commit('reduceMemo', index)
+    },
+    changeRed(index) {
+      this.$store.commit('red', index)
     },
     onDragStart({ x, y }, index) {
       this.$store.commit('startDrag', { x: x, y: y, index: index })

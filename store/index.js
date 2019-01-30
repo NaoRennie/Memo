@@ -58,6 +58,17 @@ export const mutations = {
   stopDrag() {
     this.draggingIndex = null
   },
+  red(state, index) {
+    console.log('YYYYYYYYYYYYYY')
+    state.memoList = [...state.memoList]
+    const target = { ...state.memoList[index] }
+    // target.backgroundColor = '#CC3366'
+    state.memoList[index].backgroundColor = '#CC3366'
+    console.log(target)
+    // state.memoList[this.index] = target
+    // target.back = back
+    // state.memoList[index].back = target.back
+  },
   updateText(state, { index, text }) {
     state.memoList = [...state.memoList]
     state.memoList[index] = {

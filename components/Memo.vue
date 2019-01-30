@@ -3,13 +3,18 @@
     class="memo"
     :style="{
       top: `${toppo}px`,
-      left: `${left}px`}"
+      left: `${left}px`,
+      background: `${backgroundColor}`}"
   >
     <div
       class="handle"
       @mousedown="onMousedown"
     />
     <editor :index="index" />
+    <div class="color-tab">
+      <div class="red tab" @click="$emit('changeRed', index)"/>
+      <div class="green tab" />
+    </div>
     <span class="close" @click="$emit('minusMemo', index)" >
       X
     </span>
@@ -67,5 +72,19 @@ export default {
   top: 5px;
   right: 10px;
   font-size: 30px;
+}
+.color-tab {
+  display: flex;
+  height: 20px;
+  margin-top: 290px;
+}
+.tab {
+  width: 100px;
+}
+.red {
+  background-color:#CC3366
+}
+.green {
+  background-color: rgb(5, 110, 66)
 }
 </style>

@@ -31,12 +31,11 @@ export default {
    top: 50px;
    left: 0;
    width: 200px;
-   bottom: 10px;
+   bottom: 20px;
    border: none;
    background: transparent;
    color: white;
    padding: 15px;
    font-size: 20px;
-
  }
 </style>

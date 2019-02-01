@@ -4,27 +4,30 @@
     :style="{
       top: `${toppo}px`,
       left: `${left}px`,
-      background: `${backgroundColor}`}"
+      background: `${back}`}"
   >
     <div
       class="handle"
       @mousedown="onMousedown"
     />
     <editor :index="index" />
-    <div class="color-tab">
-      <div class="red tab" @click="$emit('changeRed', index)"/>
-      <div class="green tab" />
-    </div>
-    <span class="close" @click="$emit('minusMemo', index)" >
+    <span class="close" @click="$emit('minusMemo', index)">
       X
     </span>
+    <div class="color-tab">
+      <!-- <colorBtn class="red" @click="$emit('colorChange', index, back)" /> -->
+      <colorBtn class="red" :index="index" :back="back"/>
+      <colorBtn class="green" />
+    </div>
   </div>
 </template>
 <script>
 import Editor from '~/components/Editor'
+import colorBtn from '~/components/colorBtn'
 export default {
   components: {
-    Editor
+    Editor,
+    colorBtn
   },
   props: {
     toppo: {
@@ -38,6 +41,10 @@ export default {
     index: {
       type: Number,
       default: 0
+    },
+    back: {
+      type: String,
+      default: null
     }
   },
   methods: {
@@ -46,6 +53,11 @@ export default {
         x: e.pageX,
         y: e.pageY
       })
+    },
+    changeColor(index, { back }) {
+      this.$store.commit('changedColor', {
+        index: this.index,
+        back: this.back })
     }
   }
 }
@@ -75,16 +87,18 @@ export default {
 }
 .color-tab {
   display: flex;
+  margin-top: 280px;
+  width: 200px;
   height: 20px;
-  margin-top: 290px;
-}
-.tab {
-  width: 100px;
 }
 .red {
-  background-color:#CC3366
+  width:100px;
+  height: 20px;
+  background-color:#CC3366;
 }
 .green {
+  width:100px;
+  height: 20px;
   background-color: rgb(5, 110, 66)
 }
 </style>

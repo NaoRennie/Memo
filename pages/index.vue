@@ -10,10 +10,10 @@
       :toppo="eachMemo.toppo"
       :left="eachMemo.left"
       :index="index"
-      :backgroundColor="eachMemo.backgroundColor"
+      :back="eachMemo.back"
       @dragStart="onDragStart($event, index)"
       @minusMemo="minusMemo(index)"
-      @changeRed="changeRed(index)"
+      @changeColor="changeColor(index, back)"
     />
     <plus-btn @plus="plusMemo" />
   </section>
@@ -32,7 +32,8 @@ export default {
     return {
       draggingIndex: null,
       prevX: null,
-      prevY: null
+      prevY: null,
+      back: null
     }
   },
   methods: {
@@ -49,22 +50,17 @@ export default {
       console.log('minus')
       this.$store.commit('reduceMemo', index)
     },
-    changeRed(index) {
-      this.$store.commit('red', index)
+    changeColor(index, { back }) {
+      this.$store.commit('changedColor', { index: index, back: back })
     },
     onDragStart({ x, y }, index) {
       this.$store.commit('startDrag', { x: x, y: y, index: index })
       console.log(x, y, index, 'vue')
-
-      // this.draggingIndex = index
-      // this.prevX = x
-      // this.prevY = y
     },
     onMousemove(e) {
       this.$store.commit('moveDrag', e)
     },
     onMouseup() {
-      // this.draggingIndex = null
       this.$store.commit('stopDrag')
     }
   }

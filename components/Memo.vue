@@ -15,9 +15,21 @@
       X
     </span>
     <div class="color-tab">
-      <!-- <colorBtn class="red" @click="$emit('colorChange', index, back)" /> -->
-      <colorBtn class="red" :index="index" :back="back"/>
-      <colorBtn class="green" />
+      <colorBtn
+      :index="index"
+      :back="back"
+      class="tab"
+      v-for="(color, tabindex) in colorList"
+      :key="tabindex"
+      :tabindex="tabindex"
+      :tabBack="colorList[tabindex]"
+      @click="changeColor(index, { tabIndex, back })"/>
+      <!-- :back="$store.getters.colorData(tabindex-1)"  -->
+      <!-- <colorBtn
+      //tabWidthを計算で出す
+      class="green"
+      :index="index"
+      :back="$store.getters.colorData(index-1)" /> -->
     </div>
   </div>
 </template>
@@ -28,6 +40,11 @@ export default {
   components: {
     Editor,
     colorBtn
+  },
+  data() {
+    return {
+      colorList: [ '#CC3366', '#66FF99' ]
+    }
   },
   props: {
     toppo: {
@@ -45,6 +62,14 @@ export default {
     back: {
       type: String,
       default: null
+    },
+    tabindex: {
+      type: Number,
+      default: 0
+    },
+    tabBack: {
+      type: String,
+      default: null
     }
   },
   methods: {
@@ -54,10 +79,13 @@ export default {
         y: e.pageY
       })
     },
-    changeColor(index, { back }) {
+    changeColor(index, { tabindex, back }) {
+      console.log('YYYYYYYYYYYYYYYYYYYYY')
       this.$store.commit('changedColor', {
         index: this.index,
-        back: this.back })
+        back: this.colorList[tabindex],
+        tabBack: this.colorList[tabindex]
+      })
     }
   }
 }
@@ -91,14 +119,8 @@ export default {
   width: 200px;
   height: 20px;
 }
-.red {
+.tab {
   width:100px;
   height: 20px;
-  background-color:#CC3366;
-}
-.green {
-  width:100px;
-  height: 20px;
-  background-color: rgb(5, 110, 66)
 }
 </style>

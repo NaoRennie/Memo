@@ -1,7 +1,11 @@
 <template>
-   <div
+  <div
     class="colorbtn"
-    @click="changeColor">
+    :style="{
+      background: `${tabBack}`,
+      width: `${tabWidth}`
+    }"
+  >
   </div>
 </template>
 
@@ -12,19 +16,19 @@ export default {
       type: Number,
       default: 0
     },
-    back: {
+    tabBack: {
       type: String,
       default: null
     }
-  },
-  methods: {
-    changeColor(index, back) {
-      console.log('FFF')
-      this.$store.commit('changedColor', {
-        index: this.index,
-        back: '#CC3366' })
-    }
   }
+  // methods: {
+  //   changeColor(index, back) {
+  //     console.log('FFF')
+  //     this.$store.commit('changedColor', {
+  //       index: this.index,
+  //       back: this.back })
+  //   }
+  // }
 }
 </script>
 

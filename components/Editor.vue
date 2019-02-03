@@ -1,8 +1,8 @@
 <template>
   <textarea
     :value="$store.getters.memoData(index).text"
-    @input="onInput"
     class="editor"
+    @input="onInput"
   />
 </template>
 

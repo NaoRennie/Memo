@@ -4,9 +4,12 @@
     :style="{
       top: `${toppo}px`,
       left: `${left}px`,
-      background: `${back}`}"
+      background: `${back}`,
+      zIndex: `${zIndex}`}"
     :index="index"
-    :back="colorList[2]"
+    :back="back"
+    :zIndex="zIndex"
+    @click="$emit('goFront')"
   >
     <div
       class="handle"
@@ -18,12 +21,13 @@
     </span>
     <div class="color-tab">
       <colorBtn
-      class="tab"
-      v-for="(color, tabindex) in colorList"
-      :key="tabindex"
-      :tabindex="tabindex"
-      :tabBack="colorList[tabindex]"
-      @colorChange="changeColor(tabindex)"/>
+        v-for="(color, tabindex) in colorList"
+        :key="tabindex"
+        class="tab"
+        :tabindex="tabindex"
+        :tabBack="colorList[tabindex]"
+        @colorChange="changeColor(tabindex)"
+      />
       <!-- tabWidthを計算で出す -->
     </div>
   </div>
@@ -35,11 +39,6 @@ export default {
   components: {
     Editor,
     colorBtn
-  },
-  data() {
-    return {
-      colorList: [ '#FFBEDA', '#CCFFFF', '#FFFFCC', '#AEFFBD', '#DCC2FF' ]
-    }
   },
   props: {
     toppo: {
@@ -65,6 +64,15 @@ export default {
     tabBack: {
       type: String,
       default: null
+    },
+    zIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  data() {
+    return {
+      colorList: [ '#FFBEDA', '#CCFFFF', '#FFFFCC', '#AEFFBD', '#DCC2FF' ]
     }
   },
   methods: {

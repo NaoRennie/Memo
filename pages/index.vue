@@ -11,9 +11,11 @@
       :left="eachMemo.left"
       :index="index"
       :back="eachMemo.back"
+      :z-Index="eachMemo.zIndex"
       @dragStart="onDragStart($event, index)"
       @minusMemo="minusMemo(index)"
       @changeColor="changedColor(index, back)"
+      @goFront="changeZindex(index, zIndex)"
     />
     <plus-btn @plus="plusMemo" />
   </section>
@@ -61,6 +63,9 @@ export default {
     },
     onMouseup() {
       this.$store.commit('stopDrag')
+    },
+    changeZindex(index, zIndex) {
+      this.$store.commit('updataZindex', { index: index, zIndex: zIndex })
     }
   }
 }

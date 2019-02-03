@@ -28,7 +28,6 @@ export const mutations = {
     ]
   },
   reduceMemo(state, index) {
-    console.log(index)
     state.memoList = [...this.state.memoList]
     console.log(state.memeList, 'concon')
     state.memoList.splice(index, 1)
@@ -39,7 +38,6 @@ export const mutations = {
     this.draggingIndex = index
     this.prevX = x
     this.prevY = y
-    console.log(this.prevY, 'YYY')
   },
   moveDrag(state, e) {
     if (this.draggingIndex === null) return
@@ -58,7 +56,7 @@ export const mutations = {
   stopDrag() {
     this.draggingIndex = null
   },
-  changedColor(state, { index, tabindex, back }) {
+  changedColor(state, { index, back }) {
     console.log('YYYYYYYYYYYYYY')
     console.log(back)
     console.log(index, 'js index')

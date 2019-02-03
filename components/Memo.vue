@@ -5,6 +5,8 @@
       top: `${toppo}px`,
       left: `${left}px`,
       background: `${back}`}"
+      :index="index"
+      :back="back"
   >
     <div
       class="handle"
@@ -16,14 +18,12 @@
     </span>
     <div class="color-tab">
       <colorBtn
-      :index="index"
-      :back="back"
       class="tab"
       v-for="(color, tabindex) in colorList"
       :key="tabindex"
       :tabindex="tabindex"
       :tabBack="colorList[tabindex]"
-      @click="changeColor(index, { tabIndex, back })"/>
+      @colorChange="changeColor(tabindex)"/>
       <!-- :back="$store.getters.colorData(tabindex-1)"  -->
       <!-- <colorBtn
       //tabWidthを計算で出す
@@ -79,7 +79,7 @@ export default {
         y: e.pageY
       })
     },
-    changeColor(index, { tabindex, back }) {
+    changeColor(tabindex) {
       console.log('YYYYYYYYYYYYYYYYYYYYY')
       this.$store.commit('changedColor', {
         index: this.index,

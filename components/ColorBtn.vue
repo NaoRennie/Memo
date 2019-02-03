@@ -5,6 +5,7 @@
       background: `${tabBack}`,
       width: `${tabWidth}`
     }"
+    @click="$emit('colorChange')"
   >
   </div>
 </template>
@@ -22,7 +23,7 @@ export default {
     }
   }
   // methods: {
-  //   changeColor(index, back) {
+  //   changeColor(tabindex, back) {
   //     console.log('FFF')
   //     this.$store.commit('changedColor', {
   //       index: this.index,

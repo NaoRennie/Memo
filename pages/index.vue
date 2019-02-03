@@ -13,7 +13,7 @@
       :back="eachMemo.back"
       @dragStart="onDragStart($event, index)"
       @minusMemo="minusMemo(index)"
-      @changeColor="changeColor(index, tabindex, back)"
+      @changeColor="changedColor(index, back)"
     />
     <plus-btn @plus="plusMemo" />
   </section>
@@ -22,7 +22,6 @@
 <script>
 import Memo from '~/components/Memo.vue'
 import PlusBtn from '~/components/PlusBtn.vue'
-// const colorList = [ '#CC3366', '#66FF99' ]
 export default {
   components: {
     Memo,
@@ -33,8 +32,7 @@ export default {
       draggingIndex: null,
       prevX: null,
       prevY: null,
-      back: null,
-      colorList: null
+      back: null
     }
   },
   methods: {

@@ -22,19 +22,11 @@ export default {
       default: null
     }
   }
-  // methods: {
-  //   changeColor(tabindex, back) {
-  //     console.log('FFF')
-  //     this.$store.commit('changedColor', {
-  //       index: this.index,
-  //       back: this.back })
-  //   }
-  // }
 }
 </script>
 
 <style>
 .colorbtn {
-  height: 20px;
+  border: thick double rgba(245, 242, 247, 0.6)
 }
 </style>

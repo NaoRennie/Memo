@@ -31,7 +31,7 @@ export default {
    top: 50px;
    left: 0;
    width: 200px;
-   bottom: 20px;
+   bottom: 40px;
    border: none;
    background: transparent;
    color: white;

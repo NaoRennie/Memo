@@ -5,8 +5,8 @@
       top: `${toppo}px`,
       left: `${left}px`,
       background: `${back}`}"
-      :index="index"
-      :back="back"
+    :index="index"
+    :back="colorList[2]"
   >
     <div
       class="handle"
@@ -24,12 +24,7 @@
       :tabindex="tabindex"
       :tabBack="colorList[tabindex]"
       @colorChange="changeColor(tabindex)"/>
-      <!-- :back="$store.getters.colorData(tabindex-1)"  -->
-      <!-- <colorBtn
-      //tabWidthを計算で出す
-      class="green"
-      :index="index"
-      :back="$store.getters.colorData(index-1)" /> -->
+      <!-- tabWidthを計算で出す -->
     </div>
   </div>
 </template>
@@ -43,7 +38,7 @@ export default {
   },
   data() {
     return {
-      colorList: [ '#CC3366', '#66FF99' ]
+      colorList: [ '#FFBEDA', '#CCFFFF', '#FFFFCC', '#AEFFBD', '#DCC2FF' ]
     }
   },
   props: {
@@ -80,7 +75,6 @@ export default {
       })
     },
     changeColor(tabindex) {
-      console.log('YYYYYYYYYYYYYYYYYYYYY')
       this.$store.commit('changedColor', {
         index: this.index,
         back: this.colorList[tabindex],
@@ -94,9 +88,9 @@ export default {
 <style>
 .memo {
   position: fixed;
-  background: #f00;
+  background: #FFBEDA;
   width: 200px;
-  height: 300px;
+  height: 320px;
 }
 .handle {
   position: absolute;
@@ -104,7 +98,7 @@ export default {
   left: 0;
   right: 0;
   height: 50px;
-  background-color: #900;
+  background-color: rgb(134, 88, 51);
   cursor: move;
 }
 .close {
@@ -112,15 +106,22 @@ export default {
   top: 5px;
   right: 10px;
   font-size: 30px;
+  border-radius: 50%;
+  background: rgb(109, 54, 3);
+  border: rgb(90, 50, 3) 2px solid;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
 }
 .color-tab {
   display: flex;
   margin-top: 280px;
   width: 200px;
-  height: 20px;
 }
 .tab {
-  width:100px;
-  height: 20px;
+  width: 100px;
+  height: 40px;
 }
 </style>

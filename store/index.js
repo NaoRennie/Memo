@@ -73,14 +73,13 @@ export const mutations = {
       text
     }
   },
-  updataZindex(state, { index, zIndex }) {
-    console.log('ddddddddddddddddddddddd')
-    zIndex = this.zIndex
-    console.log(zIndex)
+  updateZindex(state, index) {
+    const a = Math.max.apply(null, state.memoList.map(p => p.zIndex))
+    const x = state.memoList[index].zIndex = a + 1
     state.memoList = [...state.memoList]
     state.memoList[index] = {
       ...state.memoList[index],
-      zIndex
+      zIndex: x
     }
   }
 }

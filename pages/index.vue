@@ -11,11 +11,11 @@
       :left="eachMemo.left"
       :index="index"
       :back="eachMemo.back"
-      :z-Index="eachMemo.zIndex"
+      :zIndex="eachMemo.zIndex"
       @dragStart="onDragStart($event, index)"
       @minusMemo="minusMemo(index)"
       @changeColor="changedColor(index, back)"
-      @goFront="changeZindex(index, zIndex)"
+      @goFront="changeZindex(index)"
     />
     <plus-btn @plus="plusMemo" />
   </section>
@@ -33,8 +33,7 @@ export default {
     return {
       draggingIndex: null,
       prevX: null,
-      prevY: null,
-      back: null
+      prevY: null
     }
   },
   methods: {
@@ -44,15 +43,16 @@ export default {
       this.$store.commit('addMemo', {
         toppo: Math.floor(this.$store.state.memoList.length / widthCount) * 350,
         left: (this.$store.state.memoList.length % widthCount) * 250,
-        text: ''
+        text: '',
+        zIndex: 1
       })
     },
     minusMemo(index) {
       console.log('minus')
       this.$store.commit('reduceMemo', index)
     },
-    changedColor(index, { tabindex, back }) {
-      this.$store.commit('changedColor', { index: index, tabindex: tabindex, back: back })
+    changedColor(index, { back, tabBack }) {
+      this.$store.commit('changedColor', { index: index, back: back, tabBack: tabBack })
     },
     onDragStart({ x, y }, index) {
       this.$store.commit('startDrag', { x: x, y: y, index: index })
@@ -64,8 +64,9 @@ export default {
     onMouseup() {
       this.$store.commit('stopDrag')
     },
-    changeZindex(index, zIndex) {
-      this.$store.commit('updataZindex', { index: index, zIndex: zIndex })
+    changeZindex(index) {
+      console.log('YYYY')
+      this.$store.commit('updateZindex')
     }
   }
 }

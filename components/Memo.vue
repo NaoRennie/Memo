@@ -9,7 +9,7 @@
     :index="index"
     :back="back"
     :zIndex="zIndex"
-    @click="$emit('goFront')"
+    @click="goFront(index)"
   >
     <div
       class="handle"
@@ -21,12 +21,12 @@
     </span>
     <div class="color-tab">
       <colorBtn
-        v-for="(color, tabindex) in colorList"
-        :key="tabindex"
+        v-for="(color, tabIndex) in colorList"
+        :key="tabIndex"
         class="tab"
-        :tabindex="tabindex"
-        :tabBack="colorList[tabindex]"
-        @colorChange="changeColor(tabindex)"
+        :tabIndex="tabIndex"
+        :tabBack="colorList[tabIndex]"
+        @colorChange="changeColor(tabIndex)"
       />
       <!-- tabWidthを計算で出す -->
     </div>
@@ -57,17 +57,17 @@ export default {
       type: String,
       default: null
     },
-    tabindex: {
+    tabIndex: {
       type: Number,
       default: 0
     },
     tabBack: {
       type: String,
-      default: null
+      default: '#FFBEDA'
     },
     zIndex: {
       type: Number,
-      default: 0
+      default: 1
     }
   },
   data() {
@@ -82,12 +82,15 @@ export default {
         y: e.pageY
       })
     },
-    changeColor(tabindex) {
+    changeColor(tabIndex) {
       this.$store.commit('changedColor', {
         index: this.index,
-        back: this.colorList[tabindex],
-        tabBack: this.colorList[tabindex]
+        back: this.colorList[tabIndex],
+        tabBack: this.colorList[tabIndex]
       })
+    },
+    goFront(index) {
+      this.$store.commit('updateZindex', index)
     }
   }
 }

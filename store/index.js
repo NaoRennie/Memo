@@ -1,10 +1,10 @@
-const STORAGE_NAME = 'vuex_data'
-const storageData = localStorage.getItem(STORAGE_NAME)
+// const STORAGE_NAME = 'vuex_data'
+// const storageData = localStorage.getItem(STORAGE_NAME)
 
 // 絶対に引数を入れておく()
-export const state = () => storageData ? JSON.parse(storageData) : {
+export const state = () => ({
   memoList: []
-}
+})
 
 export const getters = {
   memoData(state) {
@@ -12,14 +12,15 @@ export const getters = {
   }
 }
 
-export const plugins = [
-  (store) => {
-    store.subscribe(() => {
-      localStorage.setItem(STORAGE_NAME, JSON.stringify(store.state))
-    })
-  }
-]
+// export const plugins = [
+//   (store) => {
+//     store.subscribe(() => {
+//       localStorage.setItem(STORAGE_NAME, JSON.stringify(store.state))
+//     })
+//   }
+// ]
 // 第一引数は上のstate, 第二引数は今から入れるもの
+
 export const mutations = {
   addMemo(state, memo) {
     state.memoList = [
@@ -81,5 +82,31 @@ export const mutations = {
       ...state.memoList[index],
       zIndex: a + 1
     }
+  },
+  setMemoList(state, memoList) {
+    console.log('set memolist')
+    state.memoList = memoList
+  }
+}
+
+export const actions = {
+  async getMemoList(store) {
+    console.log(this)
+    console.log(this)
+    console.log(this)
+    console.log(this)
+    console.log(this)
+    console.log(this)
+    // store.commit('setMemoList', memoList)
+    const memoList = await this.$axios.$get('/data')
+    console.log(memoList, 'memomemo')
+    store.commit('setMemoList', memoList)
+  },
+  async postMemoList(store, memoList) {
+    console.log(memoList)
+    console.log('post memolist')
+    // store.commit('setMemoList', memoList)
+    await this.$axios.$post('/data', memoList)
+    store.commit('setMemoList', memoList)
   }
 }

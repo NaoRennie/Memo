@@ -29,23 +29,41 @@ export default {
     Memo,
     PlusBtn
   },
+  fetch({ store }) {
+    return store.dispatch('getMemoList')
+    // const { data1 } = await axios.get('localhost:3000/data')
+    // store.commit('setMemoList', data1)
+  },
   data() {
     return {
       draggingIndex: null,
       prevX: null,
-      prevY: null
+      prevY: null,
+      cancelerId: null
     }
   },
+  // mounted() {
+  //   this.cancelerId = setInterval(() => {
+  //     this.$store.dispatch('getMemoList')
+  //   }, 100)
+  // },
+  // destroyed() {
+  //   clearInterval(this.cancelerId)
+  // },
   methods: {
     plusMemo() {
       console.log('add')
+      console.log('postMemoList自体がasyncなのでここでreturn するとasync awaitと同じ')
       const widthCount = Math.floor(window.innerWidth / 250)
-      this.$store.commit('addMemo', {
-        toppo: Math.floor(this.$store.state.memoList.length / widthCount) * 350,
-        left: (this.$store.state.memoList.length % widthCount) * 250,
-        text: '',
-        zIndex: 1
-      })
+      return this.$store.dispatch('postMemoList', [
+        ...this.$store.state.memoList,
+        {
+          toppo: Math.floor(this.$store.state.memoList.length / widthCount) * 350,
+          left: (this.$store.state.memoList.length % widthCount) * 250,
+          text: '',
+          zIndex: 1
+        }
+      ])
     },
     minusMemo(index) {
       console.log('minus')

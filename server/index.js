@@ -1,10 +1,13 @@
 const express = require('express')
 const consola = require('consola')
+const bodyParser = require('body-parser')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
+const api = require('./api.js')
+
 config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {
@@ -23,6 +26,8 @@ async function start() {
   }
 
   // Give nuxt middleware to express
+  app.use(bodyParser.json())
+  app.use(api)
   app.use(nuxt.render)
 
   // Listen the server

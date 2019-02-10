@@ -1,6 +1,4 @@
 const pkg = require('./package')
-
-
 module.exports = {
   mode: 'spa',
 
@@ -42,6 +40,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
 
   /*

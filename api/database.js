@@ -27,31 +27,30 @@ module.exports = {
 
     mongoose.connection.once('open', () => {
       // eslint-disable-next-line no-console
-      if (NODE_ENV !== 'test') console.log(`MongoDB connected`);
-      isConnection = true;
-    });
+      if (NODE_ENV !== 'test') console.log(`MongoDB connected`)
+      isConnection = true
+    })
 
     mongoose.connection.on('error', (err) => {
-      throw new Error(`MongoDB connection error: ${err}`);
-    });
+      throw new Error(`MongoDB connection error: ${err}`)
+    })
 
     mongoose.connection.on('close', () => {
       // eslint-disable-next-line no-console
-      if (NODE_ENV !== 'test') console.log(`MongoDB disconnected`);
-      isConnection = false;
-    });
+      if (NODE_ENV !== 'test') console.log(`MongoDB disconnected`)
+      isConnection = false
+    })
 
     // prettier-ignore
-    await mongoose.connect(uri, options);
+    await mongoose.connect(uri, options)
   },
   async disconnectDB() {
-    if (!isConnection) return;
-    await mongoose.disconnect();
-    if (mongod) await mongod.stop();
+    if (!isConnection) return
+    await mongoose.disconnect()
+    if (mongod) await mongod.stop()
   },
   async dropDB() {
-    if (!isConnection) return;
-    await mongoose.connection.dropDatabase();
-  },
-};
-
+    if (!isConnection) return
+    await mongoose.connection.dropDatabase()
+  }
+}

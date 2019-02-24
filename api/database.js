@@ -10,7 +10,7 @@ module.exports = {
     if (isConnection) return
     let uri
     let options
-
+,
     if (NODE_ENV !== 'test' || process.env.MONGO_ENV) {
       uri = MONGO_URI
       options = { useNewUrlParser: true }

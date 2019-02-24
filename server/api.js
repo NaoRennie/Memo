@@ -1,11 +1,11 @@
 const router = require('express').Router()
 let data = []
 
-router.get('/data', (req, res) => {
+router.get('/memo', (req, res) => {
   res.json(data)
 })
 
-router.post('/data', (req, res) => {
+router.post('/memo', (req, res) => {
   data = req.body
   res.json(data)
 })
